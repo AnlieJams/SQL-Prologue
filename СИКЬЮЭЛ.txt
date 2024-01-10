@@ -1,0 +1,37 @@
+--1. СУММА ПРЕДМЕТИКОВ НЯМ-НЯМ-НЯМ
+
+SELECT SUM(Price * 0.05) AS TotalCost
+FROM item
+
+WHERE name IN ('МОЛОКО','ХЛЕБ')
+
+--2. РАСПРОДАЖА НА АЛИ-ЭКСПРЕСС
+
+UPDATE products
+SET price = price * 0.95;
+
+--3. Хм, какой сегодня день?
+
+UPDATE products
+SET delivery_date = CURRENT_DATE
+WHERE delivery_date IS NULL;
+
+--4. Трансформация в дешёвый кабак
+
+DELETE FROM products
+WHERE quantity < 100 AND price > 70;
+
+--5. У нас всё легально
+
+DELETE FROM item
+WHERE rare = 'RED';
+
+--6. У нас нет просрочки
+
+DELETE FROM item
+WHERE delivery_date <= CURDATE() - INTERVAL 3 MONTH;
+
+--7. Ну, и всё натуральное
+
+DELETE FROM item
+WHERE info IS NULL OR discount = 0.1;
